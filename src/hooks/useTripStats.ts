@@ -11,4 +11,3 @@ export function useTripStats(trip: Trip, dayPlans: DayPlan[], spots: Spot[]) {
     budget: budgetStatus(trip, dayPlans.filter((day) => day.trip_id === trip.id), spots),
   }));
 }
-

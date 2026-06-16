@@ -1,4 +1,5 @@
 import { TripStatus } from '../constants/trip';
+import type { Member } from './member';
 
 export interface Trip {
   id: string;
@@ -8,7 +9,7 @@ export interface Trip {
   end_date: string;
   budget: number;
   currency: string;
-  members: string[];
+  members: Member[];
   status: TripStatus;
   created_at: string;
 }

@@ -7,7 +7,7 @@
         <SpotMiniCard v-for="spot in daySpots" :key="spot.id" :spot="spot" />
       </div>
     </section>
-    <DayTimeline v-if="day" :day="day" :spots="spotStore.spots" />
+    <DayTimeline v-if="day && trip" :day="day" :spots="spotStore.spots" :members="trip.members" :editable="true" />
   </main>
 </template>
 <script setup lang="ts">
@@ -16,14 +16,17 @@ import { useRoute } from 'vue-router';
 import Sortable, { type SortableEvent } from 'sortablejs';
 import { useSpotStore } from '../stores/spotStore';
 import { useDayPlanStore } from '../stores/dayPlanStore';
+import { useTripStore } from '../stores/tripStore';
 import SpotMiniCard from '../components/common/SpotMiniCard.vue';
 import DayTimeline from '../components/common/DayTimeline.vue';
 const route = useRoute();
 const spotStore = useSpotStore();
 const dayPlanStore = useDayPlanStore();
+const tripStore = useTripStore();
 const listEl = ref<HTMLElement>();
 const tripId = String(route.params.tripId);
 const dayIndex = Number(route.params.dayIndex || 1);
+const trip = computed(() => tripStore.trips.find((t) => t.id === tripId));
 const day = computed(() => dayPlanStore.ensureDay(tripId, dayIndex));
 const daySpots = computed(() => day.value.items.map((item) => spotStore.spots.find((spot) => spot.id === item.spot_id)).filter(Boolean) as any[]);
 onMounted(() => {

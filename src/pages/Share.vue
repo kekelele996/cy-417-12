@@ -1,7 +1,7 @@
 <template>
   <main class="page">
     <TripHeader v-if="trip" :trip="trip" />
-    <DayTimeline v-for="day in dayPlanStore.dayPlans" :key="day.id" :day="day" :spots="spotStore.spots" />
+    <DayTimeline v-for="day in dayPlanStore.dayPlans" :key="day.id" :day="day" :spots="spotStore.spots" :members="trip?.members || []" />
     <el-button @click="copyText">复制行程文本</el-button>
   </main>
 </template>

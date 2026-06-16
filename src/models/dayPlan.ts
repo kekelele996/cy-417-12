@@ -11,6 +11,7 @@ export interface DayPlan {
   trip_id: string;
   day_index: number;
   date: string;
+  leader_id: string | null;
   items: DayPlanItem[];
 }
 

@@ -16,4 +16,16 @@ export const tripStatusText: Record<TripStatus, string> = {
 export const transportText: Record<string, string> = { walk: '步行', metro: '地铁', taxi: '出租', train: '火车' };
 export const formatDate = (value: string) => dayjs(value).format('YYYY-MM-DD');
 export const formatCurrency = (value: number, currency = 'CNY') => new Intl.NumberFormat('zh-CN', { style: 'currency', currency }).format(value);
+export const getInitials = (name: string) => {
+  if (!name) return '?';
+  const trimmed = name.trim();
+  if (/[\u4e00-\u9fa5]/.test(trimmed)) {
+    return trimmed.slice(-2);
+  }
+  const parts = trimmed.split(/\s+/);
+  if (parts.length >= 2) {
+    return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+  }
+  return trimmed.slice(0, 2).toUpperCase();
+};
 
